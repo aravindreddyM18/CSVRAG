@@ -3,7 +3,7 @@ langchain==0.3.18
 langchain-community==0.3.17
 langchain-core==0.3.35
 langchain-experimental==0.3.4
-langchaun-ollama
+langchain-ollama==0.2.3
 pandas
 openpyxl
 streamlit==1.42.0
