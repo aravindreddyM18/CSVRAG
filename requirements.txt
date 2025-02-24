@@ -1,0 +1,8 @@
+ollama
+langchain
+langchain-community
+langchain-experimental
+langchaun-ollama
+pandas
+openpyxl
+streamlit
