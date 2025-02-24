@@ -6,7 +6,6 @@ from langchain_ollama import ChatOllama
 import loadcsv
 #import modin.pandas as pd
 from langchain_core.output_parsers import CommaSeparatedListOutputParser
-from langchain.output_parsers import PandasDataFrameOutputParser
 from langchain.agents import AgentExecutor
 from langchain_core.tools import Tool
 from langchain_experimental.utilities import PythonREPL
@@ -24,7 +23,7 @@ with st.sidebar:
 if uploaddocs:
     filename=uploaddocs.name
     dff =loadcsv.datload(uploaddocs,filename)
-    pandasoutputparser=PandasDataFrameOutputParser(dataframe=dff)
+    
     
 
 if  "chat_history" not in st.session_state:
@@ -45,8 +44,8 @@ prompttemplete=PromptTemplate(template=f""" if user greets you greet them back. 
 if user_input:
     st.chat_message("user").markdown(user_input)
     st.session_state.chat_history .append({"role":"user","content":user_input}) 
-    llm=ChatOllama(model = "mistral",  temperature = 0) 
-    pandas_df_agent=create_pandas_dataframe_agent(llm,dff,verbose=True,agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,allow_dangerous_code=True,handle_parsing_errors=True,prompt=prompttemplete,return_intermediate_steps=True,include_df_in_prompt=True,number_of_head_rows=5,max_iterations=20) # can add prompt and tools
+    llm=ChatOllama(model = "llama3.2",  temperature = 0) 
+    pandas_df_agent=create_pandas_dataframe_agent(llm,dff,verbose=True,agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,allow_dangerous_code=True,handle_parsing_errors=True,prompt=prompttemplete,include_df_in_prompt=True,number_of_head_rows=5,max_iterations=20) # can add prompt and tools
    # meassage=[{"role":"system","content":"you are helpful assistent"}, *st.session_state.chat_history]
    # You can create the tool to pass to an agent
    # repl_tool = Tool(
