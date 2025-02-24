@@ -46,7 +46,7 @@ if user_input:
     st.chat_message("user").markdown(user_input)
     st.session_state.chat_history .append({"role":"user","content":user_input}) 
     llm=ChatOllama(model = "mistral",  temperature = 0) 
-    pandas_df_agent=create_pandas_dataframe_agent(llm,dff,verbose=True,agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,allow_dangerous_code=True,handle_parsing_errors=True,prompt=prompttemplete,return_intermediate_steps=True,include_df_in_prompt=True,number_of_head_rows=5,max_iterations=7) # can add prompt and tools
+    pandas_df_agent=create_pandas_dataframe_agent(llm,dff,verbose=True,agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,allow_dangerous_code=True,handle_parsing_errors=True,prompt=prompttemplete,return_intermediate_steps=True,include_df_in_prompt=True,number_of_head_rows=5,max_iterations=20) # can add prompt and tools
    # meassage=[{"role":"system","content":"you are helpful assistent"}, *st.session_state.chat_history]
    # You can create the tool to pass to an agent
    # repl_tool = Tool(
@@ -65,11 +65,11 @@ if user_input:
         #response=chain.invoke({"input":user_input})
 
         bot_output=response["output"]
-        st.markdown(response)
+        
     except Exception as e:
         bot_output="Sorry... unable to process and generate output!"
         print(f"ERROR is: {e}")
-        st.markdown(response)
+        
     #st.write(bot_output)
     
 
